@@ -8,8 +8,8 @@ export function formatDate(date) {
 // 格式化HTML
 export function formatHTML(html) {
     let content = html
-    content = content.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '').replace(/figure/g, 'div').replace(/figcaption/g, 'blockquote')
-    content = content.replace(/<blockquote/g, '<blockquote class="info-text"')
+    content = content.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '').replace(/figure/g, 'div').replace(/figcaption/g, 'blockquote').replace(/<blockquote/g, '<blockquote class="info-text"')
     content = content.replace(/<a/g, '<a class="link-text"')
+    content = content.replace(/<img/g, '<img class="content-image avatar"')
     return content
 }

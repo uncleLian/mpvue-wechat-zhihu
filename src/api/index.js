@@ -10,16 +10,23 @@ export function getBeforeArticle(date) {
     let res = request.get(`/4/news/before/${date}`)
     return res
 }
+
 // 主题列表
 export function getThemes() {
     let res = request.get('/4/themes')
     return res
 }
 // 主题文章列表
-export function getThemeArticle(id) {
-    let res = request.get(`/4/theme/${id}`)
+export function getThemeArticle(themeId) {
+    let res = request.get(`/4/theme/${themeId}`)
     return res
 }
+// 过往主题文章列表
+export function getBeforeThemeArticle(themeId, lastId) {
+    let res = request.get(`/4/theme/${themeId}/before/${lastId}`)
+    return res
+}
+
 // 文章详情
 export function getArticleDetail(id) {
     let res = request.get(`/4/news/${id}`)

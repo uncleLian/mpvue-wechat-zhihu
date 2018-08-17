@@ -1,3 +1,4 @@
+@import "../../common/vendor.wxss";
 
 #detail .detail-cover {
   position: relative;
@@ -10,15 +11,16 @@
   width: 100%;
 }
 #detail .detail-cover .detail-title {
+  box-sizing: border-box;
   position: absolute;
-  right: 5%;
-  bottom: 40rpx;
+  left: 0;
+  bottom: 24rpx;
   z-index: 20;
-  width: 60%;
+  width: 100%;
   color: #fff;
   font-size: 34rpx;
-  text-align: right;
   text-shadow: 0 0 10rpx rgba(0,0,0,0.5);
+  padding: 0 32rpx;
 }
 #detail .detail-cover .cover-mask {
   position: absolute;
@@ -41,6 +43,7 @@
 #detail .detail-content {
   box-sizing: border-box;
   position: relative;
+  width: 100%;
   padding: 32rpx;
 }
 #detail .detail-content .link-text {
@@ -49,6 +52,10 @@
 #detail .detail-content .headline-background,
 #detail .detail-content .view-more {
   display: none;
+}
+#detail .detail-content .headline-title {
+  color: $titleColor;
+  font-size: 40rpx;
 }
 #detail .detail-content .question-title {
   color: $titleColor;
@@ -77,10 +84,11 @@
   color: #888;
 }
 #detail .detail-content .content {
+  width: 100%;
   color: #353535;
   font-size: 36rpx;
   text-align: justify;
-  line-height: 60rpx;
+  line-height: 64rpx;
 }
 #detail .detail-content .content .content-image {
   display: block;

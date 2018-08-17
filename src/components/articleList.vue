@@ -6,13 +6,18 @@
             <div class="item-container images" v-if="item.images">
                 <div class="item-title">{{item.title}}</div>
                 <div class="item-images">
-                    <img :src="item.images" mode="widthFix">
+                    <img :src="item.images[0] || item.images" mode="widthFix">
                 </div>
             </div>
             <!-- 无图 -->
             <div class="item-container text" v-else>
-                <div class="item-title"></div>
+                <div class="item-title">{{item.title}}</div>
             </div>
+        </div>
+        <div class="list-bottomLoad" v-if="json.length > 0 && bottomLoading">
+            <div class="loading" v-if="bottomLoading === 'loading'">加载中...</div>
+            <div class="nothing" v-if="bottomLoading === 'nothing'">刷完了，休息一下吧</div>
+            <div class="error" v-if="bottomLoading === 'error'">出错了，刷新试试</div>
         </div>
     </div>
 </template>
@@ -27,6 +32,10 @@ export default {
         date: {
             type: String,
             default: ''
+        },
+        bottomLoading: {
+            type: [Boolean, String],
+            default: false
         }
     },
     methods: {
@@ -53,25 +62,29 @@ export default {
         background-color: $appColor;
     }
     .list-item {
+        box-sizing: border-box;
         position: relative;
-        padding: 0 16px;
-        margin: 15px 0;
+        padding: 15px 0;
+        margin: 0 16px;
+        border-bottom: 1px solid $borderColor;
         .item-container {
+            .item-title {
+                color: $titleText;
+                font-size: $titleSize;
+                -webkit-line-clamp: 3;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
             &.images {
                 display: flex;
+                align-items: center;
                 .item-title {
                     width: 67%;
-                    color: $titleText;
-                    font-size: $titleSize;
                     padding-right: 15px;
-                    margin-bottom: 15px;
-                    -webkit-line-clamp: 3;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
                 }
                 .item-images {
                     width: 33%;
-                    max-height: 80px;
+                    height: 78px;
                     border-radius: 5px;
                     overflow: hidden;
                     img {
@@ -79,6 +92,9 @@ export default {
                         width: 100%;
                     }
                 }
+            }
+            &.text {
+                width: 100%;
             }
         }
     }

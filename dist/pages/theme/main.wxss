@@ -1,0 +1,64 @@
+@import "../../common/vendor.wxss";
+
+#theme {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+#theme .theme-cover {
+  position: relative;
+  width: 100%;
+  height: 440rpx;
+  overflow: hidden;
+}
+#theme .theme-cover .theme-image {
+  display: block;
+  width: 100%;
+}
+#theme .theme-cover .theme-title {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  bottom: 40rpx;
+  z-index: 20;
+  width: 67%;
+  color: #fff;
+  text-align: right;
+  text-shadow: 0 0 10rpx rgba(0,0,0,0.5);
+  padding-right: 32rpx;
+}
+#theme .theme-cover .theme-title .title-name {
+  align-self: flex-end;
+  width: fit-content;
+  font-size: 34rpx;
+  padding-bottom: 12rpx;
+  margin-bottom: 12rpx;
+  border-bottom: 4rpx solid #0084ff;
+}
+#theme .theme-cover .theme-title .title-description {
+  font-size: 32rpx;
+}
+#theme .theme-cover .cover-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(91,116,146,0.5);
+}
+#theme .theme-cover .cover-mask-black {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 11;
+  width: 100%;
+  height: 25%;
+  background-image: linear-gradient(0deg, transparent, rgba(0,0,0,0.5) 95%);
+}
+#theme .theme-list {
+  box-sizing: border-box;
+  position: relative;
+}

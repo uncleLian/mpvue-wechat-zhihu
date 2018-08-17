@@ -1,13 +1,13 @@
-<template name="71db9698">
-  <view id="detail" class="_div data-v-5d6edf84">
-    <view class="_div data-v-5d6edf84 detail-cover" wx:if="{{json.image}}">
-      <image class="_img data-v-5d6edf84 detail-image" src="{{json.image}}" mode="aspectFill"></image>
-      <view class="_div data-v-5d6edf84 detail-title">{{json.title}}</view>
-      <view class="_div data-v-5d6edf84 cover-mask"></view>
-      <view class="_div data-v-5d6edf84 cover-mask-black"></view>
+<template name="42e85076">
+  <view id="detail" class="_div data-v-53a2d190">
+    <view class="_div data-v-53a2d190 detail-cover" wx:if="{{json.image}}">
+      <image class="_img data-v-53a2d190 detail-image" src="{{json.image}}" mode="widthFix"></image>
+      <view class="_div data-v-53a2d190 detail-title">{{json.title}}</view>
+      <view class="_div data-v-53a2d190 cover-mask"></view>
+      <view class="_div data-v-53a2d190 cover-mask-black"></view>
     </view>
-    <view class="_div data-v-5d6edf84 detail-content">
-      <rich-text nodes="{{json.body}}" class="_rich-text data-v-5d6edf84"></rich-text>
+    <view class="_div data-v-53a2d190 detail-content">
+      <rich-text nodes="{{json.body}}" class="_rich-text data-v-53a2d190"></rich-text>
     </view>
   </view>
 </template>

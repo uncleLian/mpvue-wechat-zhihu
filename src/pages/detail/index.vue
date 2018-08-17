@@ -1,7 +1,7 @@
 <template>
     <div id="detail">
         <div class="detail-cover" v-if="json.image">
-            <img class="detail-image" :src="json.image" mode="aspectFill">
+            <img class="detail-image" :src="json.image" mode="widthFix">
             <div class="detail-title">{{json.title}}</div>
             <div class="cover-mask"></div>
             <div class="cover-mask-black"></div>
@@ -52,15 +52,16 @@ export default {
             width: 100%;
         }
         .detail-title {
+            box-sizing: border-box;
             position: absolute;
-            right: 5%;
-            bottom: 20px;
+            left: 0;
+            bottom: 12px;
             z-index: 20;
-            width: 60%;
+            width: 100%;
             color: #fff;
             font-size: $titleSize;
-            text-align: right;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            padding: 0 16px;
         }
         .cover-mask {
             position: absolute;
@@ -84,12 +85,17 @@ export default {
     .detail-content {
         box-sizing: border-box;
         position: relative;
+        width: 100%;
         padding: 16px;
         .link-text {
             color: $linkColor;
         }
         .headline-background, .view-more {
             display: none;
+        }
+        .headline-title {
+            color: $titleColor;
+            font-size: 20px;
         }
         .question-title {
             color: $titleColor;
@@ -116,10 +122,11 @@ export default {
             }
         }
         .content {
+            width: 100%;
             color: $mainText;
             font-size: 18px;
             text-align: justify;
-            line-height: 30px;
+            line-height: 32px;
             .content-image {
                 display: block;
                 width: 100%;
