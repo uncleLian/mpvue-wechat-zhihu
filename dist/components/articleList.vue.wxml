@@ -1,0 +1,16 @@
+<template name="30599f54">
+  <view class="_div data-v-9075540c article-list">
+    <view class="_div data-v-9075540c list-date" wx:if="{{date}}">{{date}}</view>
+    <view class="_div data-v-9075540c list-item" wx:key="item.id" key="{{item.id}}" bindtap="handleProxy" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}" wx:for="{{json}}" wx:for-index="index" wx:for-item="item">
+      <view class="_div data-v-9075540c item-container images" wx:if="{{item.images}}">
+        <view class="_div data-v-9075540c item-title">{{item.title}}</view>
+        <view class="_div data-v-9075540c item-images">
+          <image src="{{item.images}}" mode="widthFix" class="_img data-v-9075540c"></image>
+        </view>
+      </view>
+      <view class="_div data-v-9075540c item-container text" wx:else>
+        <view class="_div data-v-9075540c item-title"></view>
+      </view>
+    </view>
+  </view>
+</template>

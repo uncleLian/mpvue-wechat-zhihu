@@ -1,0 +1,98 @@
+
+#detail .detail-cover {
+  position: relative;
+  width: 100%;
+  height: 440rpx;
+  overflow: hidden;
+}
+#detail .detail-cover .detail-image {
+  display: block;
+  width: 100%;
+}
+#detail .detail-cover .detail-title {
+  position: absolute;
+  right: 5%;
+  bottom: 40rpx;
+  z-index: 20;
+  width: 60%;
+  color: #fff;
+  font-size: 34rpx;
+  text-align: right;
+  text-shadow: 0 0 10rpx rgba(0,0,0,0.5);
+}
+#detail .detail-cover .cover-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(91,116,146,0.5);
+}
+#detail .detail-cover .cover-mask-black {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 11;
+  width: 100%;
+  height: 25%;
+  background-image: linear-gradient(0deg, transparent, rgba(0,0,0,0.5) 95%);
+}
+#detail .detail-content {
+  box-sizing: border-box;
+  position: relative;
+  padding: 32rpx;
+}
+#detail .detail-content .link-text {
+  color: #476b95;
+}
+#detail .detail-content .headline-background,
+#detail .detail-content .view-more {
+  display: none;
+}
+#detail .detail-content .question-title {
+  color: $titleColor;
+  font-size: 40rpx;
+}
+#detail .detail-content .meta {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  margin: 16rpx 0;
+}
+#detail .detail-content .meta .avatar {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 100%;
+  margin-right: 16rpx;
+}
+#detail .detail-content .meta .author {
+  color: #0084ff;
+  white-space: nowrap;
+}
+#detail .detail-content .meta .bio {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #888;
+}
+#detail .detail-content .content {
+  color: #353535;
+  font-size: 36rpx;
+  text-align: justify;
+  line-height: 60rpx;
+}
+#detail .detail-content .content .content-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 16rpx;
+}
+#detail .detail-content .content .info-text {
+  display: block;
+  width: 100%;
+  color: #888;
+  font-size: 32rpx;
+  margin: 16rpx 0;
+  line-height: initial;
+}

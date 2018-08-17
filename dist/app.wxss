@@ -1,0 +1,15 @@
+
+page {
+  height: 100%;
+}
+.list-bottomLoad {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100rpx;
+  color: #b2b2b2;
+  font-size: 28rpx;
+}
+.list-bottomLoad .error {
+  color: #e64340;
+}

@@ -1,0 +1,15 @@
+<template name="6c47b1b2">
+  <view class="_div data-v-01f14f4d theme-list">
+    <view class="_div data-v-01f14f4d list-item" wx:key="item.id" key="{{item.id}}" bindtap="handleProxy" data-eventid="{{'0-'+index}}" data-comkey="{{$k}}" wx:for="{{json}}" wx:for-index="index" wx:for-item="item">
+      <view class="_div data-v-01f14f4d item-container">
+        <view class="_div data-v-01f14f4d item-image">
+          <image src="{{item.thumbnail}}" mode="widthFix" class="_img data-v-01f14f4d"></image>
+        </view>
+        <view class="_div data-v-01f14f4d item-text">
+          <view class="_div data-v-01f14f4d item-title">{{item.name}}</view>
+          <view class="_div data-v-01f14f4d item-subTitle">{{item.description}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

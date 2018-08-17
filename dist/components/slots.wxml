@@ -1,0 +1,2 @@
+<import src="/components/articleList.vue.wxml" />
+<import src="/components/themeList.vue.wxml" />
