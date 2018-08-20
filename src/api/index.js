@@ -21,7 +21,7 @@ export function getThemeArticle(themeId) {
     let res = request.get(`/4/theme/${themeId}`)
     return res
 }
-// 过往主题文章列表
+// 主题文章列表（更多）
 export function getBeforeThemeArticle(themeId, lastId) {
     let res = request.get(`/4/theme/${themeId}/before/${lastId}`)
     return res
@@ -34,6 +34,16 @@ export function getArticleDetail(id) {
 }
 // 文章额外信息（赞、评论）
 export function getArticleExtra(id) {
-    let res = request.get(`/4/story-extra//${id}`)
+    let res = request.get(`/4/story-extra/${id}`)
+    return res
+}
+// 文章短评论
+export function getShortComment(id) {
+    let res = request.get(`/4/story/${id}/short-comments`)
+    return res
+}
+// 文章短评论（更多）
+export function getShortCommentMore(id, lastId) {
+    let res = request.get(`/4/story/${id}/short-comments/before/${lastId}`)
     return res
 }

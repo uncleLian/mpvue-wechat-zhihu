@@ -1,15 +1,15 @@
 require("../../common/manifest.js");
 require("../../common/vendor.js");
-global.webpackJsonp([3],{
+global.webpackJsonp([4],{
 
-/***/ 46:
+/***/ 110:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(111);
 
 
 
@@ -18,18 +18,18 @@ app.$mount();
 
 /***/ }),
 
-/***/ 47:
+/***/ 111:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_53a2d190_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(87);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(113);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_53a2d190_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(114);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(48)
+  __webpack_require__(112)
 }
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 
 /* template */
@@ -72,19 +72,35 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 48:
+/***/ 112:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 49:
+/***/ 113:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils__ = __webpack_require__(27);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -106,24 +122,48 @@ if (false) {(function () {
     data: function data() {
         return {
             id: '',
-            json: ''
+            json: '',
+            extra: '',
+            loading: false
         };
     },
     mounted: function mounted() {
         this.id = this.$root.$mp.query.id;
         this.getArticleDetail();
+        this.getArticleExtra();
     },
 
     methods: {
         getArticleDetail: function getArticleDetail() {
             var _this = this;
 
+            this.loading = 'loading';
             Object(__WEBPACK_IMPORTED_MODULE_0__api__["a" /* getArticleDetail */])(this.id).then(function (res) {
                 if (res) {
                     res.body = Object(__WEBPACK_IMPORTED_MODULE_1__utils__["b" /* formatHTML */])(res.body);
                     _this.json = res;
-                    console.log(_this.json);
+                    _this.loading = false;
+                } else {
+                    _this.loading = 'nothing';
                 }
+            }).catch(function () {
+                _this.loading = 'error';
+            });
+        },
+        getArticleExtra: function getArticleExtra() {
+            var _this2 = this;
+
+            Object(__WEBPACK_IMPORTED_MODULE_0__api__["b" /* getArticleExtra */])(this.id).then(function (res) {
+                if (res) {
+                    _this2.extra = res;
+                }
+            });
+        },
+
+        // 跳转至评论页
+        url: function url() {
+            wx.navigateTo({
+                url: '/pages/comment/main?id=' + this.id
             });
         }
     }
@@ -131,7 +171,7 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 87:
+/***/ 114:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -140,6 +180,8 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
     attrs: {
       "id": "detail"
     }
+  }, [(_vm.json) ? _c('div', {
+    staticClass: "detail-container"
   }, [(_vm.json.image) ? _c('div', {
     staticClass: "detail-cover"
   }, [_c('img', {
@@ -161,7 +203,33 @@ var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._sel
       "nodes": _vm.json.body,
       "mpcomid": '0'
     }
-  })], 1)])
+  })], 1), _vm._v(" "), (_vm.extra) ? _c('div', {
+    staticClass: "detail-tool"
+  }, [_c('div', {
+    staticClass: "tool-item popularity"
+  }, [_c('div', {
+    staticClass: "item-icon my-icon-vote-up"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "item-value"
+  }, [_vm._v("赞同 " + _vm._s(_vm.extra.popularity || 0))])]), _vm._v(" "), _c('div', {
+    staticClass: "tool-item comments",
+    attrs: {
+      "eventid": '0'
+    },
+    on: {
+      "click": _vm.url
+    }
+  }, [_c('div', {
+    staticClass: "item-icon my-icon-comments"
+  }), _vm._v(" "), _c('div', {
+    staticClass: "item-value comments"
+  }, [_vm._v("评论 " + _vm._s(_vm.extra.comments || 0))])])]) : _vm._e()]) : _vm._e(), _vm._v(" "), _c('my-loading', {
+    attrs: {
+      "loading": _vm.loading,
+      "reload": _vm.getArticleDetail,
+      "mpcomid": '1'
+    }
+  })], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -176,5 +244,5 @@ if (false) {
 
 /***/ })
 
-},[46]);
+},[110]);
 //# sourceMappingURL=main.js.map

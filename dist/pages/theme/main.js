@@ -2,14 +2,14 @@ require("../../common/manifest.js");
 require("../../common/vendor.js");
 global.webpackJsonp([2],{
 
-/***/ 105:
+/***/ 124:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__index__ = __webpack_require__(125);
 
 
 
@@ -18,18 +18,18 @@ app.$mount();
 
 /***/ }),
 
-/***/ 106:
+/***/ 125:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_6e359480_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__babel_loader_node_modules_mpvue_loader_lib_selector_type_script_index_0_index_vue__ = __webpack_require__(127);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__node_modules_mpvue_loader_lib_template_compiler_index_id_data_v_6e359480_hasScoped_false_transformToRequire_video_src_source_src_img_src_image_xlink_href_node_modules_mpvue_loader_lib_selector_type_template_index_0_index_vue__ = __webpack_require__(128);
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(107)
+  __webpack_require__(126)
 }
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(2)
 /* script */
 
 /* template */
@@ -72,21 +72,20 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 107:
+/***/ 126:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ 108:
+/***/ 127:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray__ = __webpack_require__(118);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_articleList__ = __webpack_require__(96);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__api__ = __webpack_require__(16);
 
 //
 //
@@ -107,18 +106,16 @@ if (false) {(function () {
 //
 //
 //
-
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-    components: { articleList: __WEBPACK_IMPORTED_MODULE_1__components_articleList__["a" /* default */] },
     data: function data() {
         return {
             winHeight: 0,
             themeId: '',
             themeInfo: '',
             themeArticles: [],
-            bottomLoading: 'loading'
+            bottomLoading: true
         };
     },
     mounted: function mounted() {
@@ -131,7 +128,7 @@ if (false) {(function () {
         getThemeArticle: function getThemeArticle() {
             var _this = this;
 
-            Object(__WEBPACK_IMPORTED_MODULE_2__api__["e" /* getThemeArticle */])(this.themeId).then(function (res) {
+            Object(__WEBPACK_IMPORTED_MODULE_1__api__["h" /* getThemeArticle */])(this.themeId).then(function (res) {
                 if (res) {
                     _this.themeInfo = {
                         'image': res.image,
@@ -145,20 +142,22 @@ if (false) {(function () {
         getBeforeThemeArticle: function getBeforeThemeArticle() {
             var _this2 = this;
 
-            this.bottomLoading = 'loading';
-            var lastId = this.themeArticles[this.themeArticles.length - 1].id;
-            Object(__WEBPACK_IMPORTED_MODULE_2__api__["c" /* getBeforeThemeArticle */])(this.themeId, lastId).then(function (res) {
-                console.log(res);
-                if (res) {
-                    var _themeArticles;
+            if (this.bottomLoading !== 'nothing' && this.bottomLoading !== 'error') {
+                this.bottomLoading = 'loading';
+                var lastId = this.themeArticles[this.themeArticles.length - 1].id;
+                Object(__WEBPACK_IMPORTED_MODULE_1__api__["d" /* getBeforeThemeArticle */])(this.themeId, lastId).then(function (res) {
+                    if (res && res.stories.length > 0) {
+                        var _themeArticles;
 
-                    (_themeArticles = _this2.themeArticles).push.apply(_themeArticles, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default()(res.stories));
-                } else {
-                    _this2.bottomLoading = 'nothing';
-                }
-            }).catch(function () {
-                _this2.bottomLoading = 'error';
-            });
+                        (_themeArticles = _this2.themeArticles).push.apply(_themeArticles, __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_toConsumableArray___default()(res.stories));
+                        _this2.bottomLoading = true;
+                    } else {
+                        _this2.bottomLoading = 'nothing';
+                    }
+                }).catch(function () {
+                    _this2.bottomLoading = 'error';
+                });
+            }
         },
 
         // 获取系统信息 => 设置滚动页面高度
@@ -176,7 +175,7 @@ if (false) {(function () {
 
 /***/ }),
 
-/***/ 109:
+/***/ 128:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -237,5 +236,5 @@ if (false) {
 
 /***/ })
 
-},[105]);
+},[124]);
 //# sourceMappingURL=main.js.map

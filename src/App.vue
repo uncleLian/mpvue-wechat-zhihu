@@ -1,11 +1,17 @@
 <script>
 export default {
-    created() {
-    }
 }
 </script>
 
 <style lang="stylus">
+/* iconfont */
+[class*=' my-icon-'], [class^=my-icon-] {
+    font-family: 'iconfont';
+    font-size: inherit;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 page {
     height: 100%;
 }

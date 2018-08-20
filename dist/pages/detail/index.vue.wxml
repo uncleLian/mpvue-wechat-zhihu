@@ -1,13 +1,27 @@
+<import src="/components/loading.vue.wxml" />
 <template name="42e85076">
   <view id="detail" class="_div data-v-53a2d190">
-    <view class="_div data-v-53a2d190 detail-cover" wx:if="{{json.image}}">
-      <image class="_img data-v-53a2d190 detail-image" src="{{json.image}}" mode="widthFix"></image>
-      <view class="_div data-v-53a2d190 detail-title">{{json.title}}</view>
-      <view class="_div data-v-53a2d190 cover-mask"></view>
-      <view class="_div data-v-53a2d190 cover-mask-black"></view>
+    <view class="_div data-v-53a2d190 detail-container" wx:if="{{json}}">
+      <view class="_div data-v-53a2d190 detail-cover" wx:if="{{json.image}}">
+        <image class="_img data-v-53a2d190 detail-image" src="{{json.image}}" mode="widthFix"></image>
+        <view class="_div data-v-53a2d190 detail-title">{{json.title}}</view>
+        <view class="_div data-v-53a2d190 cover-mask"></view>
+        <view class="_div data-v-53a2d190 cover-mask-black"></view>
+      </view>
+      <view class="_div data-v-53a2d190 detail-content">
+        <rich-text nodes="{{json.body}}" class="_rich-text data-v-53a2d190"></rich-text>
+      </view>
+      <view class="_div data-v-53a2d190 detail-tool" wx:if="{{extra}}">
+        <view class="_div data-v-53a2d190 tool-item popularity">
+          <view class="_div data-v-53a2d190 item-icon my-icon-vote-up"></view>
+          <view class="_div data-v-53a2d190 item-value">赞同 {{extra.popularity || 0}}</view>
+        </view>
+        <view class="_div data-v-53a2d190 tool-item comments" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">
+          <view class="_div data-v-53a2d190 item-icon my-icon-comments"></view>
+          <view class="_div data-v-53a2d190 item-value comments">评论 {{extra.comments || 0}}</view>
+        </view>
+      </view>
     </view>
-    <view class="_div data-v-53a2d190 detail-content">
-      <rich-text nodes="{{json.body}}" class="_rich-text data-v-53a2d190"></rich-text>
-    </view>
+    <template data="{{...$root[$kk+'1'], $root}}" is="9893188c"></template>
   </view>
 </template>

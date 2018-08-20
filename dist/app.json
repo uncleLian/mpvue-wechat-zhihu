@@ -2,7 +2,8 @@
     "pages": [
         "pages/index/main",
         "pages/detail/main",
-        "pages/theme/main"
+        "pages/theme/main",
+        "pages/comment/main"
     ],
     "window": {
         "backgroundTextStyle": "light",

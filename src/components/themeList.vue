@@ -11,12 +11,26 @@
                 <div class="item-subTitle">{{item.description}}</div>
             </div>
         </div>
+        <div class="list-bottomLoad" v-if="json.length > 0 && bottomLoading">
+            <div class="loading" v-if="bottomLoading === 'loading'">加载中...</div>
+            <div class="nothing" v-if="bottomLoading === 'nothing'">刷完了，休息一下吧</div>
+            <div class="error" v-if="bottomLoading === 'error'">出错了，刷新试试</div>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
-    props: ['json'],
+    props: {
+        json: {
+            type: Array,
+            default: []
+        },
+        bottomLoading: {
+            type: [Boolean, String],
+            default: false
+        }
+    },
     methods: {
         url(item) {
             wx.navigateTo({

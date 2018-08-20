@@ -1,20 +1,29 @@
-@import "../../common/vendor.wxss";
 
-#detail .detail-cover {
+#detail {
+  position: relative;
+  width: 100%;
+  padding-bottom: 104rpx;
+}
+#detail .detail-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 104rpx;
+}
+#detail .detail-container .detail-cover {
   position: relative;
   width: 100%;
   height: 440rpx;
   overflow: hidden;
 }
-#detail .detail-cover .detail-image {
+#detail .detail-container .detail-cover .detail-image {
   display: block;
   width: 100%;
 }
-#detail .detail-cover .detail-title {
+#detail .detail-container .detail-cover .detail-title {
   box-sizing: border-box;
   position: absolute;
   left: 0;
-  bottom: 24rpx;
+  bottom: 30rpx;
   z-index: 20;
   width: 100%;
   color: #fff;
@@ -22,7 +31,7 @@
   text-shadow: 0 0 10rpx rgba(0,0,0,0.5);
   padding: 0 32rpx;
 }
-#detail .detail-cover .cover-mask {
+#detail .detail-container .detail-cover .cover-mask {
   position: absolute;
   top: 0;
   left: 0;
@@ -31,7 +40,7 @@
   height: 100%;
   background-color: rgba(91,116,146,0.5);
 }
-#detail .detail-cover .cover-mask-black {
+#detail .detail-container .detail-cover .cover-mask-black {
   position: absolute;
   top: 0;
   left: 0;
@@ -40,67 +49,107 @@
   height: 25%;
   background-image: linear-gradient(0deg, transparent, rgba(0,0,0,0.5) 95%);
 }
-#detail .detail-content {
+#detail .detail-container .detail-content {
   box-sizing: border-box;
   position: relative;
   width: 100%;
+  word-wrap: break-word;
   padding: 32rpx;
 }
-#detail .detail-content .link-text {
+#detail .detail-container .detail-content .link-text {
   color: #476b95;
 }
-#detail .detail-content .headline-background,
-#detail .detail-content .view-more {
+#detail .detail-container .detail-content .headline-background,
+#detail .detail-container .detail-content .view-more {
   display: none;
 }
-#detail .detail-content .headline-title {
+#detail .detail-container .detail-content .headline-title {
   color: $titleColor;
   font-size: 40rpx;
 }
-#detail .detail-content .question-title {
+#detail .detail-container .detail-content .question-title {
   color: $titleColor;
   font-size: 40rpx;
 }
-#detail .detail-content .meta {
+#detail .detail-container .detail-content .meta {
   display: flex;
   align-items: center;
   font-size: 26rpx;
   margin: 16rpx 0;
 }
-#detail .detail-content .meta .avatar {
+#detail .detail-container .detail-content .meta .avatar {
   width: 48rpx;
   height: 48rpx;
   border-radius: 100%;
   margin-right: 16rpx;
 }
-#detail .detail-content .meta .author {
+#detail .detail-container .detail-content .meta .author {
   color: #0084ff;
   white-space: nowrap;
 }
-#detail .detail-content .meta .bio {
+#detail .detail-container .detail-content .meta .bio {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   color: #888;
 }
-#detail .detail-content .content {
+#detail .detail-container .detail-content .content {
   width: 100%;
   color: #353535;
   font-size: 36rpx;
   text-align: justify;
   line-height: 64rpx;
 }
-#detail .detail-content .content .content-image {
+#detail .detail-container .detail-content .content .content-image {
   display: block;
   width: 100%;
   height: auto;
   margin-top: 16rpx;
 }
-#detail .detail-content .content .info-text {
+#detail .detail-container .detail-content .content .info-text {
   display: block;
   width: 100%;
   color: #888;
   font-size: 32rpx;
   margin: 16rpx 0;
   line-height: initial;
+}
+#detail .detail-container .detail-tool {
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  width: 100%;
+  height: 104rpx;
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  font-weight: 500;
+  padding: 20rpx 32rpx;
+  border-top: 2rpx solid #f4f4f4;
+  background: #fff;
+}
+#detail .detail-container .detail-tool .tool-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  margin-right: 30rpx;
+  border-radius: 6rpx;
+}
+#detail .detail-container .detail-tool .tool-item.popularity {
+  color: #0084ff;
+  font-weight: 500;
+  padding: 12rpx 20rpx;
+  background-color: rgba(0,132,255,0.1);
+}
+#detail .detail-container .detail-tool .tool-item.comments {
+  color: #8590a6;
+  font-weight: 500;
+}
+#detail .detail-container .detail-tool .tool-item .item-icon {
+  margin-right: 10rpx;
+  line-height: 1;
 }

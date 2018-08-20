@@ -18,17 +18,15 @@
 </template>
 
 <script>
-import articleList from '@/components/articleList'
 import { getThemeArticle, getBeforeThemeArticle } from '@/api'
 export default {
-    components: { articleList },
     data() {
         return {
             winHeight: 0,
             themeId: '',
             themeInfo: '',
             themeArticles: [],
-            bottomLoading: 'loading'
+            bottomLoading: true
         }
     },
     mounted() {
@@ -50,18 +48,20 @@ export default {
             })
         },
         getBeforeThemeArticle() {
-            this.bottomLoading = 'loading'
-            let lastId = this.themeArticles[this.themeArticles.length - 1].id
-            getBeforeThemeArticle(this.themeId, lastId).then(res => {
-                console.log(res)
-                if (res) {
-                    this.themeArticles.push(...res.stories)
-                } else {
-                    this.bottomLoading = 'nothing'
-                }
-            }).catch(() => {
-                this.bottomLoading = 'error'
-            })
+            if (this.bottomLoading !== 'nothing' && this.bottomLoading !== 'error') {
+                this.bottomLoading = 'loading'
+                let lastId = this.themeArticles[this.themeArticles.length - 1].id
+                getBeforeThemeArticle(this.themeId, lastId).then(res => {
+                    if (res && res.stories.length > 0) {
+                        this.themeArticles.push(...res.stories)
+                        this.bottomLoading = true
+                    } else {
+                        this.bottomLoading = 'nothing'
+                    }
+                }).catch(() => {
+                    this.bottomLoading = 'error'
+                })
+            }
         },
         // 获取系统信息 => 设置滚动页面高度
         getSystemInfo() {
@@ -95,7 +95,7 @@ export default {
             flex-direction: column;
             position: absolute;
             right: 0;
-            bottom: 20px;
+            bottom: 15px;
             z-index: 20;
             width: 67%;
             color: #fff;

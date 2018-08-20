@@ -1,16 +1,18 @@
 <template>
     <div id="index">
+        <!-- tabs -->
         <div class="index-tabs">
             <div class="tabs-item" v-for="(item, index) in tabsOption" :key="index" :class="[activeIndex === index? 'active': '']" @click="activeIndex = index">{{item}}</div>
         </div>
+        <!-- swiper -->
         <swiper class="index-swiper" :current="activeIndex" @change="pageChange">
             <swiper-item class="swiper-item">
                 <scroll-view scroll-y @scrolltolower="getBeforeArticle" :style="{'height': winHeight + 'px'}">
                     <article-list v-for="(item, index) in articles" :key="index" :json="item.stories" :date="item.formatDate"></article-list>
-                    <div class="list-bottomLoad" v-if="articles.length > 0">
-                        <div class="loading" v-if="articlesLoading === 'loading'">加载中...</div>
-                        <div class="nothing" v-if="articlesLoading === 'nothing'">刷完了，休息一下吧</div>
-                        <div class="error" v-if="articlesLoading === 'error'">出错了，刷新试试</div>
+                    <div class="list-bottomLoad" v-if="articles.length > 0 && bottomLoading">
+                        <div class="loading" v-if="bottomLoading === 'loading'">加载中...</div>
+                        <div class="nothing" v-if="bottomLoading === 'nothing'">刷完了，休息一下吧</div>
+                        <div class="error" v-if="bottomLoading === 'error'">出错了，刷新试试</div>
                     </div>
                 </scroll-view>
             </swiper-item>
@@ -23,19 +25,16 @@
     </div>
 </template>
 <script>
-import articleList from '@/components/articleList'
-import themeList from '@/components/themeList'
 import { getLatestArticle, getBeforeArticle, getThemes } from '@/api'
 import { formatDate } from '@/utils'
 export default {
-    components: { articleList, themeList },
     data() {
         return {
             winHeight: 0,
             tabsOption: ['最新消息', '主题日报'],
             activeIndex: 0,
             articles: [],
-            articlesLoading: 'loading',
+            bottomLoading: true,
             themes: []
         }
     },
@@ -56,31 +55,26 @@ export default {
         },
         // 过往消息
         getBeforeArticle() {
-            this.articlesLoading = 'loading'
-            let dateParams = this.articles[this.articles.length - 1].date
-            getBeforeArticle(dateParams).then(res => {
-                if (res) {
-                    res.formatDate = formatDate(res.date)
-                    this.articles.push(res)
-                } else {
-                    this.articlesLoading = 'nothing'
-                }
-            }).catch(() => {
-                this.articlesLoading = 'error'
-            })
+            if (this.bottomLoading !== 'nothing' && this.bottomLoading !== 'error') {
+                this.bottomLoading = 'loading'
+                let lastDate = this.articles[this.articles.length - 1].date
+                getBeforeArticle(lastDate).then(res => {
+                    if (res) {
+                        this.bottomLoading = true
+                        res.formatDate = formatDate(res.date)
+                        this.articles.push(res)
+                    } else {
+                        this.bottomLoading = 'nothing'
+                    }
+                }).catch(() => {
+                    this.bottomLoading = 'error'
+                })
+            }
         },
         // 主题列表
         getThemes() {
             getThemes().then(res => {
                 this.themes = res.others
-            })
-        },
-        // 获取系统信息 => 设置滚动页面高度
-        getSystemInfo() {
-            wx.getSystemInfo({
-                success: (res) => {
-                    this.winHeight = res.windowHeight - 50
-                }
             })
         },
         // 页面change
@@ -91,6 +85,14 @@ export default {
             } else if (this.activeIndex === 1 && this.themes.length === 0) {
                 this.getThemes()
             }
+        },
+        // 获取系统信息 => 设置滚动页面高度
+        getSystemInfo() {
+            wx.getSystemInfo({
+                success: (res) => {
+                    this.winHeight = res.windowHeight - 50
+                }
+            })
         }
     },
     // 下拉刷新

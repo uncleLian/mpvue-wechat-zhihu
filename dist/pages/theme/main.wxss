@@ -1,4 +1,3 @@
-@import "../../common/vendor.wxss";
 
 #theme {
   position: relative;
@@ -21,7 +20,7 @@
   flex-direction: column;
   position: absolute;
   right: 0;
-  bottom: 40rpx;
+  bottom: 30rpx;
   z-index: 20;
   width: 67%;
   color: #fff;
