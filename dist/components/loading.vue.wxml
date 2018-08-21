@@ -1,13 +1,1 @@
-<template name="9893188c">
-  <view class="_div data-v-771e1658 pageLoading" wx:if="{{loading}}">
-    <view class="_div data-v-771e1658 pageLoading-type nothing" wx:if="{{loading === 'nothing'}}">
-      <icon class="_icon data-v-771e1658 type-icon" type="info" size="{{70}}"></icon>
-      <view class="_div data-v-771e1658 type-label">{{nothingText}}</view>
-    </view>
-    <view class="_div data-v-771e1658 pageLoading-type error" wx:if="{{loading === 'error'}}">
-      <icon class="_icon data-v-771e1658 type-icon" type="warn" size="{{70}}"></icon>
-      <view class="_div data-v-771e1658 type-label">{{errorText}}</view>
-      <button class="_button data-v-771e1658 type-button" type="primary" hover-class="app-button-hover" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">重试</button>
-    </view>
-  </view>
-</template>
+<template name="9893188c"><view class="_div data-v-771e1658 pageLoading" wx:if="{{loading}}"><view class="_div data-v-771e1658 pageLoading-type nothing" wx:if="{{loading === 'nothing'}}"><icon class="_icon data-v-771e1658 type-icon" type="info" size="{{70}}"></icon> <view class="_div data-v-771e1658 type-label">{{nothingText}}</view></view> <view class="_div data-v-771e1658 pageLoading-type error" wx:if="{{loading === 'error'}}"><icon class="_icon data-v-771e1658 type-icon" type="warn" size="{{70}}"></icon> <view class="_div data-v-771e1658 type-label">{{errorText}}</view> <button class="_button data-v-771e1658 type-button" type="primary" hover-class="app-button-hover" bindtap="handleProxy" data-eventid="{{'0'}}" data-comkey="{{$k}}">重试</button></view></view></template>

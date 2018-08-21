@@ -20,8 +20,12 @@
                 </div>
                 <div class="tool-item comments" @click="url">
                     <div class="item-icon my-icon-comments"></div>
-                    <div class="item-value comments">评论 {{extra.comments || 0}}</div>
+                    <div class="item-value">评论 {{extra.comments || 0}}</div>
                 </div>
+                <button class="tool-item share" open-type="share">
+                    <div class="item-icon my-icon-share"></div>
+                    <div class="item-value">分享</div>
+                </button>
             </div>
         </div>
         <my-loading :loading="loading" :reload="getArticleDetail"></my-loading>
@@ -72,6 +76,13 @@ export default {
             wx.navigateTo({
                 url: `/pages/comment/main?id=${this.id}`
             })
+        }
+    },
+    // 分享
+    onShareAppMessage() {
+        return {
+            'title': this.json.title,
+            'path': `/pages/detail/main?id=${this.id}`
         }
     }
 }
@@ -209,15 +220,22 @@ export default {
                 font-size: 14px;
                 margin-right: 15px;
                 border-radius: 3px;
+                font-weight: 500;
                 &.popularity {
                     color: $appColor;
-                    font-weight: 500;
                     padding: 6px 10px;
                     background-color: $disableColor;
                 }
                 &.comments {
                     color: $iconColor;
-                    font-weight: 500;
+                }
+                &.share {
+                    color: $iconColor;
+                    border: none;
+                    background: transparent;
+                    &:after{
+                        border: none;
+                    }
                 }
                 .item-icon {
                     margin-right: 5px;

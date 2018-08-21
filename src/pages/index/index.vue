@@ -103,6 +103,12 @@ export default {
             await this.getThemes()
         }
         wx.stopPullDownRefresh()
+    },
+    // 分享
+    onShareAppMessage() {
+        return {
+            'path': `/pages/index/main`
+        }
     }
 }
 </script>

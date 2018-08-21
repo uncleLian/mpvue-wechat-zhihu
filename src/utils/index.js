@@ -31,16 +31,29 @@ export function formatTime(dateTimeStamp) {
     var dayC = diffValue / day
     var hourC = diffValue / hour
     var minC = diffValue / minute
-    if (monthC >= 1) {
-        result = '' + parseInt(monthC) + '月前'
+
+    // 数值补0方法
+    var zero = function (value) {
+        if (value < 10) {
+            return '0' + value
+        }
+        return value
+    }
+
+    if (monthC > 12) {
+        var date = new Date(dateTimeStamp)
+        result = date.getFullYear() + '年' + zero(date.getMonth() + 1) + '月' + zero(date.getDate()) + '日'
+        console.log('result', result)
+    } else if (monthC >= 1) {
+        result = parseInt(monthC) + '月前'
     } else if (weekC >= 1) {
-        result = '' + parseInt(weekC) + '周前'
+        result = parseInt(weekC) + '周前'
     } else if (dayC >= 1) {
-        result = '' + parseInt(dayC) + '天前'
+        result = parseInt(dayC) + '天前'
     } else if (hourC >= 1) {
-        result = '' + parseInt(hourC) + '小时前'
+        result = parseInt(hourC) + '小时前'
     } else if (minC >= 1) {
-        result = '' + parseInt(minC) + '分钟前'
+        result = parseInt(minC) + '分钟前'
     } else {
         result = '刚刚'
     }

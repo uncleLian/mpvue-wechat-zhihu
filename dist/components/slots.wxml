@@ -1,6 +1,4 @@
-<import src="/components/articleList.vue.wxml" />
-<import src="/components/commentList.vue.wxml" />
+<import src="/components/commentList.vue.wxml" /><import src="/components/loading.vue.wxml" />
 <import src="/components/loading.vue.wxml" />
+<import src="/components/articleList.vue.wxml" /><import src="/components/themeList.vue.wxml" />
 <import src="/components/articleList.vue.wxml" />
-<import src="/components/themeList.vue.wxml" />
-<import src="/components/loading.vue.wxml" />

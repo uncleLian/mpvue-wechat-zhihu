@@ -6,7 +6,7 @@
             <div class="item-container images" v-if="item.images">
                 <div class="item-title">{{item.title}}</div>
                 <div class="item-images">
-                    <img :src="item.images[0] || item.images" mode="widthFix">
+                    <img :src="item.images[0] || item.images" mode="widthFix" lazy-load>
                 </div>
             </div>
             <!-- 无图 -->
@@ -48,7 +48,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 .article-list {
     .list-date {
         flex-center();

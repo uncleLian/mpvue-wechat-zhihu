@@ -3,7 +3,7 @@
         <div class="list-item" v-for="item in json" :key="item.id" @click="url(item)">
             <div class="item-container">
                 <div class="item-image">
-                    <img :src="item.thumbnail" mode="aspectFill">
+                    <img :src="item.thumbnail" mode="aspectFill" lazy-load="true">
                 </div>
             </div>
             <div class="item-text">
@@ -41,7 +41,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 .theme-list {
     .list-item {
         box-sizing: border-box;
