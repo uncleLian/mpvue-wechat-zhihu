@@ -50,6 +50,7 @@ export default {
 
 <style lang="stylus" scoped>
 .article-list {
+    box-sizing: border-box;
     .list-date {
         flex-center();
         color: #fff;

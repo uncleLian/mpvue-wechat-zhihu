@@ -18,7 +18,7 @@
                     <div class="item-icon my-icon-vote-up"></div>
                     <div class="item-value">赞同 {{extra.popularity || 0}}</div>
                 </div>
-                <div class="tool-item comments" @click="url">
+                <div class="tool-item comment" @click="url('comment')">
                     <div class="item-icon my-icon-comments"></div>
                     <div class="item-value">评论 {{extra.comments || 0}}</div>
                 </div>
@@ -26,6 +26,10 @@
                     <div class="item-icon my-icon-share"></div>
                     <div class="item-value">分享</div>
                 </button>
+                <div class="tool-item home" @click="url('index')">
+                    <div class="item-icon my-icon-home"></div>
+                    <div class="item-value">首页</div>
+                </div>
             </div>
         </div>
         <my-loading :loading="loading" :reload="getArticleDetail"></my-loading>
@@ -72,10 +76,16 @@ export default {
             })
         },
         // 跳转至评论页
-        url() {
-            wx.navigateTo({
-                url: `/pages/comment/main?id=${this.id}`
-            })
+        url(type) {
+            if (type === 'index') {
+                wx.navigateTo({
+                    url: `/pages/index/main`
+                })
+            } else if (type === 'comment') {
+                wx.navigateTo({
+                    url: `/pages/comment/main?id=${this.id}`
+                })
+            }
         }
     },
     // 分享
@@ -93,6 +103,7 @@ export default {
     position: relative;
     width: 100%;
     padding-bottom: $articleToolHeight;
+    background: #fff;
     .detail-container {
         position: relative;
         width: 100%;
@@ -215,31 +226,35 @@ export default {
             padding: 10px 16px;
             border-top: 1px solid $borderColor;
             background: #fff;
+            overflow-x: auto;
             .tool-item {
                 flex-center();
+                min-width: fit-content;
+                color: $iconColor;
                 font-size: 14px;
-                margin-right: 15px;
-                border-radius: 3px;
                 font-weight: 500;
+                white-space: nowrap;
+                line-height: 1;
+                padding: 6px 8px;
+                margin-right: 6px;
+                border-radius: 3px;
                 &.popularity {
                     color: $appColor;
-                    padding: 6px 10px;
                     background-color: $disableColor;
                 }
-                &.comments {
-                    color: $iconColor;
-                }
                 &.share {
-                    color: $iconColor;
                     border: none;
                     background: transparent;
-                    &:after{
+                    margin-left: 0;
+                    &:after {
                         border: none;
                     }
                 }
+                &:last-child {
+                    margin-right: 16px;
+                }
                 .item-icon {
                     margin-right: 5px;
-                    line-height: 1;
                 }
             }
         }

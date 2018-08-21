@@ -5,6 +5,8 @@
 
 > 知乎日报微信小程序
 
+##### 注：通过mpvue构建的小程序代码在 /dist 目录
+
 ## 简介
 mpvue-wechat-zhihu 是一个入门级别的微信小程序项目，共4个页面，涉及最新消息、主题日报、文章阅读、文章分享、评论阅读等
 
@@ -14,31 +16,58 @@ mpvue-wechat-zhihu 是一个入门级别的微信小程序项目，共4个页面
 - [知乎日报Api（感谢提供）](https://github.com/izzyleung/ZhihuDailyPurify/wiki/%E7%9F%A5%E4%B9%8E%E6%97%A5%E6%8A%A5-API-%E5%88%86%E6%9E%90)
 - [微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
 - [微信小程序文档](https://developers.weixin.qq.com/miniprogram/dev/)
+-  [Stylus（css预处理器）](https://github.com/stylus/stylus)
+- [IconFont（阿里图标库）](http://www.iconfont.cn/)
 
+## 扫码体验
 
-## 运行
-##### 注：运行、开发和发布的小程序代码在/dist目录
+> 审核中（2018-08-21 提交） 
+
+## 运行、开发和发布
+
+##### 前序准备：[微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
+
 ```bash
 # 克隆项目
 git clone https://github.com/uncleLian/mpvue-wechat-zhihu.git
 
-# 下载微信开发者工具
-https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html
+# 打开开发者工具，选择小程序项目，点击 + 导入小程序
+项目目录：/dist 目录
+AppID：选择测试小程序
+项目名称：随意
 
-# 导入小程序代码到开发者工具即可查看项目
-选择/dist目录
-```
+# 打开之后会报错（请求URL不在合法域名列表中）
+点击右上角详情，勾上这个选项后就可以看到项目了
+[ ] 不校验合法域名、web-view（业务域名）、TLS 版本以及 HTTPS 证书
 
-## 开发和发布
-```bash
 # 安装依赖
 npm install
    
-# 启动服务
+# 启动服务（开发调试）
 npm run dev
 
-# 构建正式发布的小程序代码（/dist目录）
+# 构建正式发布的小程序代码
 npm run build
+```
+
+## 目录
+```js
+├── build
+├── config
+├── dist                        // 小程序代码
+├── src
+│   ├── api                     // 请求api
+│   ├── assets                  // 静态资源
+│   ├── components              // 组件
+│   ├── pages                   // 页面
+│   │   ├── comment         
+│   │   ├── detail
+│   │   ├── index
+│   │   └── theme
+│   └── utils                   // 工具
+│   ├── app.json                // 小程序配置
+│   ├── App.vue
+│   ├── main.js
 ```
 
 ## 说明

@@ -7,13 +7,12 @@
                     <div class="title-name">{{themeInfo.name}}</div>
                     <div class="title-description">{{themeInfo.description}}</div>
                 </div>
-                <div class="cover-mask"></div>
-                <div class="cover-mask-black"></div>
             </div>
             <div class="theme-list">
                 <article-list :json="themeArticles" :bottomLoading="bottomLoading"></article-list>
             </div>
         </scroll-view>
+        <my-loading :loading="loading" :reload="getThemeArticle"></my-loading>
     </div>
 </template>
 
@@ -26,6 +25,7 @@ export default {
             themeId: '',
             themeInfo: '',
             themeArticles: [],
+            loading: false,
             bottomLoading: true
         }
     },
@@ -36,15 +36,21 @@ export default {
     },
     methods: {
         getThemeArticle() {
+            this.loading = 'loading'
             getThemeArticle(this.themeId).then(res => {
-                if (res) {
+                if (res && res.stories.length > 0) {
+                    this.loading = false
                     this.themeInfo = {
                         'image': res.image,
                         'name': res.name,
                         'description': res.description
                     }
                     this.themeArticles = res.stories
+                } else {
+                    this.loading = 'nothing'
                 }
+            }).catch(() => {
+                this.loading = 'error'
             })
         },
         getBeforeThemeArticle() {
@@ -80,6 +86,7 @@ export default {
     position: relative;
     width: 100%;
     height: 100%;
+    background: #fff;
     .theme-cover {
         position: relative;
         width: 100%;
@@ -88,6 +95,8 @@ export default {
         .theme-image {
             display: block;
             width: 100%;
+            background-color: $imgBgColor;
+            filter: contrast(50%);
         }
         .theme-title {
             box-sizing: border-box;
@@ -108,29 +117,11 @@ export default {
                 font-size: $titleSize;
                 padding-bottom: 6px;
                 margin-bottom: 6px;
-                border-bottom: 2px solid $appColor;
+                border-bottom: 4px solid $appColor;
             }
             .title-description {
                 font-size: 16px;
             }
-        }
-        .cover-mask {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 10;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(91, 116, 146, 0.5);
-        }
-        .cover-mask-black {
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 11;
-            width: 100%;
-            height: 25%;
-            background-image: linear-gradient(0deg, transparent, rgba(0, 0, 0, 0.5) 95%);
         }
     }
     .theme-list {

@@ -6,19 +6,21 @@
         </div>
         <!-- swiper -->
         <swiper class="index-swiper" :current="activeIndex" @change="pageChange">
+            <!-- 最新消息 -->
             <swiper-item class="swiper-item">
                 <scroll-view scroll-y @scrolltolower="getBeforeArticle" :style="{'height': winHeight + 'px'}">
                     <article-list v-for="(item, index) in articles" :key="index" :json="item.stories" :date="item.formatDate"></article-list>
-                    <div class="list-bottomLoad" v-if="articles.length > 0 && bottomLoading">
-                        <div class="loading" v-if="bottomLoading === 'loading'">加载中...</div>
-                        <div class="nothing" v-if="bottomLoading === 'nothing'">刷完了，休息一下吧</div>
-                        <div class="error" v-if="bottomLoading === 'error'">出错了，刷新试试</div>
+                    <div class="list-bottomLoad" v-if="articles.length > 0 && articleBottomLoading">
+                        <div class="loading" v-if="articleBottomLoading === 'loading'">加载中...</div>
+                        <div class="nothing" v-if="articleBottomLoading === 'nothing'">刷完了，休息一下吧</div>
+                        <div class="error" v-if="articleBottomLoading === 'error'">出错了，刷新试试</div>
                     </div>
                 </scroll-view>
             </swiper-item>
+            <!-- 主题日报 -->
             <swiper-item class="swiper-item">
                 <scroll-view scroll-y :style="{'height': winHeight + 'px'}">
-                    <theme-list :json="themes"></theme-list>
+                    <theme-list :json="themes" :bottomLoading="themeBottomLoading"></theme-list>
                 </scroll-view>
             </swiper-item>
         </swiper>
@@ -31,11 +33,12 @@ export default {
     data() {
         return {
             winHeight: 0,
-            tabsOption: ['最新消息', '主题日报'],
+            tabsOption: ['日报', '推荐主题'],
             activeIndex: 0,
             articles: [],
-            bottomLoading: true,
-            themes: []
+            themes: [],
+            articleBottomLoading: true,
+            themeBottomLoading: 'loading'
         }
     },
     mounted() {
@@ -45,36 +48,46 @@ export default {
     methods: {
         // 最新消息
         getLatestArticle() {
+            wx.showLoading({ title: '加载中', mask: true })
             getLatestArticle().then(res => {
+                wx.hideLoading()
                 if (res) {
                     res.formatDate = formatDate(res.date)
                     this.articles = []
                     this.articles.push(res)
                 }
+            }).catch(() => {
+                wx.showToast({ title: '请求失败，请检查网络', icon: 'none', duration: 3000 })
             })
         },
         // 过往消息
         getBeforeArticle() {
-            if (this.bottomLoading !== 'nothing' && this.bottomLoading !== 'error') {
-                this.bottomLoading = 'loading'
+            if (this.articleBottomLoading !== 'nothing' && this.articleBottomLoading !== 'error') {
+                this.articleBottomLoading = 'loading'
                 let lastDate = this.articles[this.articles.length - 1].date
                 getBeforeArticle(lastDate).then(res => {
                     if (res) {
-                        this.bottomLoading = true
+                        this.articleBottomLoading = true
                         res.formatDate = formatDate(res.date)
                         this.articles.push(res)
                     } else {
-                        this.bottomLoading = 'nothing'
+                        this.articleBottomLoading = 'nothing'
                     }
                 }).catch(() => {
-                    this.bottomLoading = 'error'
+                    this.articleBottomLoading = 'error'
                 })
             }
         },
         // 主题列表
         getThemes() {
+            this.themeBottomLoading = 'loading'
             getThemes().then(res => {
-                this.themes = res.others
+                if (res) {
+                    this.themes = res.others
+                }
+                this.themeBottomLoading = 'nothing'
+            }).catch(() => {
+                this.themeBottomLoading = 'error'
             })
         },
         // 页面change
@@ -121,7 +134,7 @@ $tabsHeight = 50px;
     width: 100%;
     height: 100%;
     z-index: 10;
-    background-color: #fff;
+    background-color: #e8e8e8;
     .index-tabs {
         flex-center();
         box-sizing: border-box;
@@ -134,13 +147,14 @@ $tabsHeight = 50px;
         height: $tabsHeight;
         border-bottom: 1px solid #dcdfe6;
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.12), 0 0 3px 0 rgba(0, 0, 0, 0.04);
-        backgroun-color: #fff;
+        background-color: #fff;
         .tabs-item {
             position: relative;
             color: $mainText;
-            font-size: $subTitleSize;
+            font-size: $titleSize;
+            font-weight: 500;
             padding: 8px 0;
-            margin: 0 30px;
+            margin: 0 30px 8px;
             &.active {
                 color: $appColor;
                 &:after {
@@ -149,7 +163,7 @@ $tabsHeight = 50px;
                     bottom: 0;
                     left: 0;
                     right: 0;
-                    height: 2px;
+                    height: 4px;
                     border-radius: 5px;
                     background-color: $appColor;
                 }
@@ -161,6 +175,7 @@ $tabsHeight = 50px;
         width: 100%;
         height: 100%;
         padding-top: $tabsHeight;
+        background-color: #fff;
         .swiper-item {
             overflow: auto;
         }

@@ -3,15 +3,15 @@
         <div class="list-item" v-for="item in json" :key="item.id" @click="url(item)">
             <div class="item-container">
                 <div class="item-image">
-                    <img :src="item.thumbnail" mode="aspectFill" lazy-load="true">
+                    <img :src="item.thumbnail" mode="widthFix">
+                </div>
+                <div class="item-text">
+                    <div class="item-title">{{item.name}}</div>
+                    <div class="item-subTitle">{{item.description}}</div>
                 </div>
             </div>
-            <div class="item-text">
-                <div class="item-title">{{item.name}}</div>
-                <div class="item-subTitle">{{item.description}}</div>
-            </div>
         </div>
-        <div class="list-bottomLoad" v-if="json.length > 0 && bottomLoading">
+        <div class="list-bottomLoad" v-if="bottomLoading">
             <div class="loading" v-if="bottomLoading === 'loading'">加载中...</div>
             <div class="nothing" v-if="bottomLoading === 'nothing'">刷完了，休息一下吧</div>
             <div class="error" v-if="bottomLoading === 'error'">出错了，刷新试试</div>
@@ -50,34 +50,37 @@ export default {
         border: 1px solid #ebeef5;
         border-radius: 5px;
         box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+        background-color: #fff;
         overflow: hidden;
         .item-container {
-            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
             width: 100%;
-            height: 160px;
-            background-color: #ddd;
-            border-radius: 5px 5px 0 0;
-            overflow: hidden;
+            padding: 15px 12px;
             .item-image {
-                display: block;
-                width: 100%;
+                width: 33%;
+                height: 78px;
+                border-radius: 5px;
+                overflow: hidden;
+                background-color: #ddd;
                 img {
                     display: block;
                     width: 100%;
                 }
             }
-        }
-        .item-text {
-            padding: 8px;
-            .item-title {
-                text-ellipsis();
-                color: $titleText;
-                font-size: $subTitleSize;
-            }
-            .item-subTitle {
-                text-ellipsis();
-                color: $mainText;
-                font-size: 13px;
+            .item-text {
+                width: 67%;
+                padding-left: 15px;
+                .item-title {
+                    text-ellipsis();
+                    color: $titleText;
+                    font-size: $titleSize;
+                }
+                .item-subTitle {
+                    color: $titleText;
+                    font-size: $subTitleSize;
+                }
             }
         }
     }
