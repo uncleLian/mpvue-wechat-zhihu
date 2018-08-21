@@ -32,23 +32,25 @@ mpvue-wechat-zhihu 是一个入门级别的微信小程序项目，共4个页面
 
 > 如有其它问题请提 issues，非常感谢
 
-## 运行、开发和发布
+## 运行
 
 ##### 前序准备：[微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)
 
 ```bash
-# 克隆项目
-git clone https://github.com/uncleLian/mpvue-wechat-zhihu.git
+一、克隆项目
+# git clone https://github.com/uncleLian/mpvue-wechat-zhihu.git
 
-# 打开开发者工具，选择小程序项目，点击 + 导入小程序
-项目目录：/dist 目录
-AppID：选择测试小程序
-项目名称：随意
+二、打开开发者工具，选择小程序项目，点击 + 导入小程序
+# 项目目录：/dist 目录
+# AppID：选择测试小程序
+# 项目名称：随意
 
-# 打开之后会报错（请求URL不在合法域名列表中）
-点击右上角详情，勾上这个选项后就可以看到项目了
-[ ] 不校验合法域名、web-view（业务域名）、TLS 版本以及 HTTPS 证书
-
+三、打开之后会报错（请求URL不在合法域名列表中）
+# 点击右上角详情，勾上下方选项就可以正常查看项目
+# [] 不校验合法域名、web-view（业务域名）、TLS 版本以及 HTTPS 证书
+```
+## 开发和发布
+```bash
 # 安装依赖
 npm install
    
