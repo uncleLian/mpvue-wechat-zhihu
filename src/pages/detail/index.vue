@@ -127,6 +127,7 @@ export default {
                 color: #fff;
                 font-size: $titleSize;
                 text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+                user-select: all
                 padding: 0 16px;
             }
             .cover-mask {
@@ -156,6 +157,7 @@ export default {
             padding: 16px;
             .link-text {
                 color: $linkColor;
+                user-select: all
             }
             .headline-background, .view-more {
                 display: none;
@@ -163,10 +165,12 @@ export default {
             .headline-title {
                 color: $titleColor;
                 font-size: 20px;
+                user-select: all
             }
             .question-title {
                 color: $titleColor;
                 font-size: 20px;
+                user-select: all
             }
             .meta {
                 display: flex;
@@ -235,7 +239,7 @@ export default {
                 font-weight: 500;
                 white-space: nowrap;
                 line-height: 1;
-                padding: 6px 8px;
+                padding: 8px 10px;
                 margin-right: 6px;
                 border-radius: 3px;
                 &.popularity {

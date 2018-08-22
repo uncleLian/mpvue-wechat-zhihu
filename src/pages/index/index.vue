@@ -4,12 +4,13 @@
         <div class="index-tabs">
             <div class="tabs-item" v-for="(item, index) in tabsOption" :key="index" :class="[activeIndex === index? 'active': '']" @click="activeIndex = index">{{item}}</div>
         </div>
+        <div class="index-tips" :animation="AniData" @transitionend="AniData = ''">已为你拉取最新内容</div>
         <!-- swiper -->
         <swiper class="index-swiper" :current="activeIndex" @change="pageChange">
             <!-- 最新消息 -->
             <swiper-item class="swiper-item">
-                <scroll-view scroll-y @scrolltolower="getBeforeArticle" :style="{'height': winHeight + 'px'}">
-                    <article-list v-for="(item, index) in articles" :key="index" :json="item.stories" :date="item.formatDate"></article-list>
+                <scroll-view scroll-y :enable-back-to-top="true" @scrolltolower="getBeforeArticle" :style="{'height': winHeight + 'px'}">
+                    <article-list :id="'articleList-' + index" v-for="(item, index) in articles" :key="index" :json="item.stories" :date="item.formatDate"></article-list>
                     <div class="list-bottomLoad" v-if="articles.length > 0 && articleBottomLoading">
                         <div class="loading" v-if="articleBottomLoading === 'loading'">加载中...</div>
                         <div class="nothing" v-if="articleBottomLoading === 'nothing'">刷完了，休息一下吧</div>
@@ -19,7 +20,7 @@
             </swiper-item>
             <!-- 主题日报 -->
             <swiper-item class="swiper-item">
-                <scroll-view scroll-y :style="{'height': winHeight + 'px'}">
+                <scroll-view scroll-y :enable-back-to-top="true" :style="{'height': winHeight + 'px'}">
                     <theme-list :json="themes" :bottomLoading="themeBottomLoading"></theme-list>
                 </scroll-view>
             </swiper-item>
@@ -38,17 +39,18 @@ export default {
             articles: [],
             themes: [],
             articleBottomLoading: true,
-            themeBottomLoading: 'loading'
+            themeBottomLoading: 'loading',
+            AniData: ''
         }
     },
     mounted() {
+        wx.showLoading({ title: '加载中', mask: true })
         this.getSystemInfo()
         this.getLatestArticle()
     },
     methods: {
         // 最新消息
         getLatestArticle() {
-            wx.showLoading({ title: '加载中', mask: true })
             getLatestArticle().then(res => {
                 wx.hideLoading()
                 if (res) {
@@ -116,6 +118,13 @@ export default {
             await this.getThemes()
         }
         wx.stopPullDownRefresh()
+
+        let animation = wx.createAnimation({
+            duration: 400,
+            timingFunction: 'ease'
+        })
+        animation.translateY(50).step().translateY(-50).step({ delay: 2000 })
+        this.AniData = animation.export()
     },
     // 分享
     onShareAppMessage() {
@@ -169,6 +178,21 @@ $tabsHeight = 50px;
                 }
             }
         }
+    }
+    .index-tips {
+        flex-center();
+        box-sizing: border-box;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 20;
+        width: 100%;
+        height: 40px;
+        color: $appColor;
+        font-size: 14px;
+        padding: 8px 0;
+        background: #fff;
     }
     .index-swiper {
         box-sizing: border-box;

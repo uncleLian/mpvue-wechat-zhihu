@@ -47,7 +47,7 @@ export default {
         position: relative;
         color: $mainText;
         font-size: 15px;
-        padding: 15px 0;
+        padding: 12px 0;
         margin: 0 20px;
         border-bottom: 1px solid $borderColor;
         .item-header {

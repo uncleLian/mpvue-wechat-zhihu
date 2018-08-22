@@ -1,6 +1,6 @@
 <template>
     <div id="comment">
-        <scroll-view scroll-y @scrolltolower="getShortCommentMore" :style="{'height': winHeight + 'px'}">
+        <scroll-view scroll-y :enable-back-to-top="true" @scrolltolower="getShortCommentMore" :style="{'height': winHeight + 'px'}">
             <comment-list :json="comments" :bottomLoading="bottomLoading"></comment-list>
         </scroll-view>
         <my-loading :loading="loading" :reload="getShortComment"></my-loading>

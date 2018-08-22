@@ -6,7 +6,7 @@
             <div class="item-container images" v-if="item.images">
                 <div class="item-title">{{item.title}}</div>
                 <div class="item-images">
-                    <img :src="item.images[0] || item.images" mode="widthFix" lazy-load>
+                    <img :src="item.images[0] || item.images" mode="widthFix" :lazy-load="true">
                 </div>
             </div>
             <!-- 无图 -->
@@ -58,14 +58,14 @@ export default {
         letter-spacing: 1px;
         width: 40%;
         height: 28px;
-        margin-top: 15px;
+        margin-top: 12px;
         border-radius: 50px;
         background-color: $appColor;
     }
     .list-item {
         box-sizing: border-box;
         position: relative;
-        padding: 15px 0;
+        padding: 12px 0;
         margin: 0 16px;
         border-bottom: 1px solid $borderColor;
         .item-container {

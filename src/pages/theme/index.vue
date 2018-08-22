@@ -90,7 +90,7 @@ export default {
     .theme-cover {
         position: relative;
         width: 100%;
-        height: 220px;
+        height: 200px;
         overflow: hidden;
         .theme-image {
             display: block;
