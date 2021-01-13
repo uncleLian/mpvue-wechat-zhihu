@@ -20,8 +20,6 @@
 
 > 审核中（2018-08-21 提交） 
 
-##### 注：如有企业类型账号提供，请查看下方联系方式
-
 ## 截图
 
 ![image](https://github.com/uncleLian/mpvue-wechat-zhihu/raw/master/screenshots/index.png) ![image](https://github.com/uncleLian/mpvue-wechat-zhihu/raw/master/screenshots/theme.png)
@@ -95,7 +93,7 @@ npm run build
 
 ## 交流
 欢迎热爱学习、忠于分享的朋友一起来交流
-- Vue交流群：338241465 —— 广州-小鑫
+- Vue交流群：338241465
 
 ## License
 [MIT](http://opensource.org/licenses/MIT)
